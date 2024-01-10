@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 // App Config
 const app = express();
 const port = process.env.PORT || 8081;
-const connection_url = "mongodb+srv://20521920:minhthanh@cluster0.pgdx55v.mongodb.net/?retryWrites=true&w=majority";
+const connection_url = "mongodb+srv://hynoras:Quang23022002@cluster0.hxredev.mongodb.net/?retryWrites=true&w=majority";
 
 dotenv.config();
 
