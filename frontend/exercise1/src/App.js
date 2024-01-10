@@ -7,11 +7,11 @@ import { Button, Input } from '@material-ui/core';
 import { auth } from './firebase';
 import ImageUpload from './components/imageUpload';
 import axios from './axios';
-// import Pusher from 'pusher-js';
+import Pusher from 'pusher-js';
 
-// const pusher = new Pusher('5601e06d285cef4e6836', {
-//   cluster: 'ap2',
-// });
+const pusher = new Pusher('5601e06d285cef4e6836', {
+  cluster: 'ap2',
+});
 
 function getModalStyle() {
   const top = 50;
@@ -58,33 +58,33 @@ function App() {
     }
   ]);
 
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((authUser) => {
-  //     if (authUser) {
-  //       setUser(authUser);
-  //     } else {
-  //       setUser(null);
-  //     }
-  //   });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, [user, username]);
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        setUser(authUser);
+      } else {
+        setUser(null);
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, [user, username]);
 
-  // const fetchPosts = async () => {
-  //   await axios.get('/sync').then((response) => setPosts(response.data));
-  // };
+  const fetchPosts = async () => {
+    await axios.get('/sync').then((response) => setPosts(response.data));
+  };
 
-  // useEffect(() => {
-  //   const channel = pusher.subscribe('posts');
-  //   channel.bind('inserted', (data) => {
-  //     fetchPosts();
-  //   });
-  // }, []);
+  useEffect(() => {
+    const channel = pusher.subscribe('posts');
+    channel.bind('inserted', (data) => {
+      fetchPosts();
+    });
+  }, []);
 
-  // useEffect(() => {
-  //   fetchPosts();
-  // }, []);
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   const signUp = (e) => {
     e.preventDefault();
